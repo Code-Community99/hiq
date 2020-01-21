@@ -18,6 +18,10 @@
     <div class="navbar options">
         <a href="{% url 'events:events' %}" class="btn btn-warning">Events</a>
     </div>
+
+    <div class="navbar options">
+      <a href="{% url 'Feeds:Feeds' %}"><button class="btn btn-warning">Feeds</button></a>
+    </div>
         <!-- <div class="navbar options"> -->
           <!-- <a href="#">Projects</a> -->
         <!-- </div> -->
@@ -50,7 +54,7 @@
                         <li>
                             <b style="color:green;"> {{event.event_organizer.Email}}</b>
                         </li>
-                            {{event.event_description}}
+                            {{event.event_description}} Date -> {{event.event_date}}
                             <p style="color:#fff;text-align:right;font-size:10px;">Posted on -> {{event.event_post_date}}</p>
                 </ul>
             </p>

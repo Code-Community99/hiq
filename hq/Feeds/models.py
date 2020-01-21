@@ -11,3 +11,6 @@ class feeds_list(models.Model):
 
     class Meta:
         db_table = "feeds"
+
+    def _str__(self):
+        return self.feed

@@ -2,12 +2,16 @@ from django.shortcuts import render,redirect
 
 from signup.models import signup_user
 from .forms import loginfrm
+from events.models import events_list
+import datetime
 # Create your views here.
 def login(request):
     form = loginfrm()
     error_var = ""
     sess = ""
     alredylog=""
+    events_list.objects.filter(event_date__lte = datetime.datetime.now()).delete()
+
 
     if request.method == 'POST':
         try:

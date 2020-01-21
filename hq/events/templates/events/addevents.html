@@ -16,6 +16,10 @@
         {% csrf_token %}
         <table>
             {{events.as_table}}
+            <tr>
+                <td>Event Date</td>
+                <td><input type="datetime-local" name="eventdate"></td>
+            </tr>
         </table>
         <input type="submit" name="submit" value="Add Event">
     </form>

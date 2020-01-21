@@ -1,8 +1,3 @@
-*
-{
-    background-color: #456;
-}
-
 h1
 {
     text-align: center;
@@ -104,4 +99,10 @@ ul
 {
     flex: 1;
     display: inline-block;
+}
+
+img
+{
+    width: 2vw;
+    height: 2vw;
 }

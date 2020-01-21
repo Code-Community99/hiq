@@ -34,7 +34,8 @@ def add_event(request):
             return render(request , "./events/addevents.html" , context = {"events":eventfrm,"errorlog":errorlog})
 
         else:
-            events_list.objects.create(event_organizer_id = signup_user.objects.get(Email = request.session["email"]).uid, event_description = request.POST["event_description"])
+            events_list.objects.create(event_organizer_id = signup_user.objects.get(Email = request.session["email"]).uid, event_description = request.POST["event_description"],
+            event_date = request.POST["eventdate"])
 
             return redirect("/events/")
 

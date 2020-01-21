@@ -19,4 +19,5 @@ urlpatterns = [
     url("logout/" , include("logout.urls")),
     url("gallery/" , include("gallery.urls")),
     url("Feeds/" , include("Feeds.urls")),
+    url("comments/" , include("comments.urls")),
 ]+static(settings.MEDIA_URL , document_root = settings.MEDIA_ROOT)

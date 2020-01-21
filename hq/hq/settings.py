@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'kt_*yi1px_k5%z^)#5kn&0ste+are41_rl_eia6o&y+nu9d*=w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -64,6 +64,7 @@ TEMPLATES = [
                 os.path.join(BASE_DIR , "gallery/templates/gallery"),
                 os.path.join(BASE_DIR , "Feeds/templates/Feeds"),
                 os.path.join(BASE_DIR , "hq/templates/"),
+                os.path.join(BASE_DIR , "comments/templates/"),
                 ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -144,6 +145,7 @@ os.path.join(BASE_DIR , "login/static/"),
 os.path.join(BASE_DIR , "gallery/static/"),
 os.path.join(BASE_DIR , "Feeds/static/"),
 os.path.join(BASE_DIR , "hq/static/"),
+os.path.join(BASE_DIR , "comments/static/"),
 ]
 
 

@@ -9,6 +9,7 @@
 
 {% block header %}
     <h1 >Latest Feeds in HiQ | Feeds </h1>
+    <br>
 
     <div class="nav-bar container">
         <div class="navbar first options">
@@ -32,7 +33,6 @@
             <a href="{% url 'gallery:view_photo' %}" class="btn btn-warning">Gallery</a>
         </div>
 
-
     </div>
 
 {% endblock %}
@@ -41,34 +41,17 @@
 <div class="row">
 
     <div class="col-sm-8 col-md-8 col-lg-8 child1">
-
-        {% for update in updates %}
-
-            <div class="singular">
-                    <ul>
-
-                        <a href="{% url 'profile:view_collequeprof' update.event_organizer.Email %}" title="View {{update.event_organizer.Email}}'s Project (s)">{{update.event_organizer.First_Name}}</a
-                    </ul>
-                    <h6 id = "desc">
-                        {{update.event_description}}
-                    </h6>
-                    <h4 id = "time">
-                        {{update.event_post_date}}
-                    </h4>
-
-            </div>
-
+        {% for feed in updates %}
+            <p>
+                <img src="/media/{{feed.uid.profilepic}}" alt="">
+                <a href="{% url 'coms:comments' feed.Fid %}">{{feed.feed}}</a>
+                <br>
+                <span>{{feed.post_time}}</span>
+            </p>
         {% endfor %}
     </div>
     <div class="col-sm-4 col-md-4 col-lg-4 child2">
-        {% for online in online_users %}
-                <p>
-                    <small id = "online">
-                        {{online}} is Online
-                    </small>
-                </p>
 
-        {% endfor %}
     </div>
 
 </div>
