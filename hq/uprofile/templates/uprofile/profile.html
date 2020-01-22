@@ -21,25 +21,26 @@
         <img src="{% static 'uprofile/img/hamburger.jpg' %}" class="logo" alt="">
       </div>
       <div class="navbar  options">
-        <a href="{% url 'home:home' %}" class="btn btn-success">Home</a>
+        <a href="{% url 'home:home' %}">Home</a>
       </div>
       <div class="navbar options">
-        <a href="{% url 'Feeds:Feeds' %}" class="btn btn-success">Feeds</a>
+        <a href="{% url 'Feeds:Feeds' %}">Feeds</a>
       </div>
 
+
       <div class="navbar options">
-          <a href="{% url 'events:events' %}" class="btn btn-warning">Events</a>
+          <a href="{% url 'events:events' %}">Events</a>
       </div>
-      
+
        <div class="navbar options">
-        <a href="{% url 'upload:projects' %}" class="btn btn-success">Projects</a>
+        <a href="{% url 'upload:projects' %}">Projects</a>
       </div>
-      <div class="navbar options">
-        <a href="{% url 'developers:contact' %}" class="btn btn-success">Contact</a>
-      </div>
+      <!-- <div class="navbar options">
+        <a href="{% url 'developers:contact' %}">Contact</a>
+      </div> -->
 
       <div class="navbar options">
-          <a href="{% url 'gallery:view_photo' %}" class="btn btn-success">Gallery</a>
+          <a href="{% url 'gallery:view_photo' %}">Gallery</a>
       </div>
 
       <!-- <div class="navbar options">
@@ -54,6 +55,7 @@
     </div> -->
 
     <div class="userInfo">
+        <form class="userInfo" action="{% url 'profile:update' %}" method="post">
         <a href="#" title="change profile?">
             <img src="/media/{{profile}}" class="imgDp" alt="profileImg"> <div class="writeinfo">
         </a>
@@ -64,7 +66,6 @@
 
 
 
-      <form class="userInfo" action="{% url 'profile:update' %}" method="post">
           {% csrf_token %}
          <table>
              <tr>

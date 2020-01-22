@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from upload_pro.models import project
 from signup.models import signup_user
+from events.models import events_list
+import datetime
 
 from django.http import HttpResponse
 # Create your views here.
@@ -8,6 +10,7 @@ from django.http import HttpResponse
 
 def profile_viewer(request):
     uname = ""
+    events_list.objects.filter(eventup_date__lte = datetime.datetime.now()).delete()
     try:
         statusdecision = signup_user.objects.get(Email = request.session["email"]).logstatus
 
@@ -28,7 +31,7 @@ def profile_viewer(request):
 
             userinfo = signup_user.objects.get(Email = request.session["email"])
 
-            return render(request , "./uprofile/profile.html" , context = {"projects":project.objects.filter(uid = userinfo.uid) ,
+            return render(request , "./uprofile/user.html" , context = {"projects":project.objects.filter(uid = userinfo.uid) ,
             "userinfo":userinfo , "profile": signup_user.objects.get(Email = request.session["email"]).profilepic, "email":uname , "username":usern})
 
 

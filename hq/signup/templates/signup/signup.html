@@ -16,8 +16,8 @@
                 <div class="row">
                     <div class="col-md-12 col-xs-8 col-sm-8 col-lg-8 col-xl-8 signup-cont">
 
-                        <div class="form">
-                          <form class="form-group" method="post" action="{% url 'signup:signup' %}" enctype="multipart/form-data" >
+                        <div class="form" id="FormRes">
+                          <form class="form-group signupForm" id="signUp" action="{% url 'signup:signup' %}" method="get" enctype="multipart/form-data" >
                             <div class="title">
                               <h2>Sign Up page</h2>
                             </div>
@@ -41,11 +41,11 @@
                             <label for="Password">Confirm Password</label><br>
                             <input type="password" id="cpassword" class="form-control" name="cpassword" placeholder="confirm password" required>
                             <label for="pnumber">Phone Number</label><br>
-                            <input type="number" id="email" class="form-control" name="pnumber" placeholder="Phone number" required>
+                            <input type="number" id="email" class="form-control" name="pnumber" maxlength="10" placeholder="Phone number" required>
                             <label for="profile">Upload Profile</label><br>
-                            <input type="file" id="profile" class="form-control" name="profile"  required>
+                            <input type="file" id="profile" class="form-control" name="profile"  accept=".png,.jpeg,jpg"required>
                             <br>
-                            <input type="submit"  class="btn btn-success lg" name="button">
+                            <input type="submit" onclick="check()" class="btn btn-success lg" name="button">
                             <span class="Front">  Or  <a href="{% url 'login:login' %}">  login</a> </span>
 
                             </div>
@@ -58,4 +58,30 @@
             <!-- Hello {{sess}} -->
 
     </body>
+     <script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{% static 'signup/js/App.js' %}"></script>
+    <script type="text/javascript">
+        function check(){
+                 var password = document.getElementById("password").value;
+                 var confirmPassword = document.getElementById("cpassword").value;
+                 var length = password.length;
+                 var error = "";
+                 if (password == confirmPassword ) {
+                     if(length < 8){
+                        error += "Password is too short";
+                        alert(error);
+                    }else{
+                     var redirect = document.getElementById("signUp").method = "POST";
+                   }
+                 }else {
+                    error +="Password mismatch";
+                    alert(error);
+                 }
+                 // document.getElementById("fname").innerHTML = firstName;
+                 // alert(password + confirmPassword);
+                 // window.location.href = "";
+             }
+
+    </script>
 </html>

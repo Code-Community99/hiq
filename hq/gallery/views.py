@@ -7,9 +7,57 @@ from .models import HiQGallery
 from signup.models import signup_user
 
 def photos(request):
-    hqgallery = HiQGallery.objects.order_by("id")
-    # uploaduser
-    return render(request , "./gallery/photos.html" , context = {"gallery":hqgallery})
+    uploadimage = HiQGallery.objects.order_by("id")
+
+    form = galform()
+    if request.method =="POST":
+
+        email = ""
+
+        try:
+            statusdecision = signup_user.objects.get(Email = request.session["email"]).logstatus
+
+            request.session['email']
+
+        except Exception as e:
+            lcontrol = False
+            uname = "You are not yet logged in."
+            return redirect("/login/")
+
+        else:
+            lcontrol = True
+            try:
+
+                email = signup_user.objects.get(Email = request.session['email']).uid
+
+            except Exception as e:
+                print("{}\n\n\n\n\n\n\n\n\n\n".format(e))
+                return redirect("/login/")
+
+            else:
+                getuid = email
+                HiQGallery.objects.create(image = request.FILES['image'], uid_id = getuid, imagedescription = request.POST['imagedescription'])
+
+                hqgallery = HiQGallery.objects.all()
+                return render(request , "./gallery/gallery.html" , context = {"gallery":hqgallery , "uploadimage":uploadimage , "loginshow":lcontrol , "uploadimage":form})
+
+    else:
+        hqgallery = HiQGallery.objects.all()
+        # uploaduser
+        lcontrol = False
+        try:
+            statusdecision = signup_user.objects.get(Email = request.session["email"]).logstatus
+
+            request.session['email']
+
+        except Exception as e:
+            lcontrol = False
+            return render(request , "./gallery/gallery.html" , context = {"gallery":hqgallery , "uploadimage":uploadimage , "uploadimage":form , "loginshow":lcontrol })
+
+        else:
+            lcontrol = True
+            hqgallery = HiQGallery.objects.all()
+            return render(request , "./gallery/gallery.html" , context = {"gallery":hqgallery , "uploadimage":uploadimage , "uploadimage":form , "loginshow":lcontrol })
 
 
 

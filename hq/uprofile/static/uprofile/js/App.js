@@ -7,8 +7,11 @@ $(document).ready(function(){
     window.location.href = "user.html";
   });
   $(".ham").click(function() {
-   $(".options").slideToggle();
+   // $(".options").slideToggle();
    $(".nav").css("opacity", "1");
+  });
+  $(".logo").click(function() {
+   $(".userInfo").slideToggle();
   });
   $(".backFlip").click(function(){
     $(".content").toggle();
@@ -31,12 +34,19 @@ $(document).ready(function(){
     $(".ff").show();
     $(".form").slideDown();
   }
+  $(window).scroll(function(){
+    if ($(document).scrollTop() > 50) {
+            $(".nav").css("opacity", "0.6");
+          } else {
+            $(".nav").css("opacity", "1");
+          }
+})
+$(window).scroll(function(){
+  if ($(document).scrollTop() > 50) {
+          $(".add-feed-section").slideUp();
+        } else {
+          $(".add-feed-section").slideDown();
+        }
+})
 
-  //   $(window).scroll(function(){
-  //     if ($(document).scrollTop() > 50) {
-  //             $(".nav").css("opacity", "0.6");
-  //           } else {
-  //             $(".nav").css("opacity", "1");
-  //           }
-  // })
-  // });
+});

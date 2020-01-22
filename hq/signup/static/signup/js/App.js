@@ -6,9 +6,19 @@ $(document).ready(function(){
     // console.log(email + password);
     window.location.href = "user.html";
   });
+  // $(".signupForm").submit(function(event){
+  //   event.preventDefault();
+  //   var password = document.getElementById("password").value;
+  //   var confirmPassword = document.getElementById("cpassword").value;
+  //   alert(password + confirmPassword);
+  //   window.location.href = "user.html";
+  // });
   $(".ham").click(function() {
    $(".options").slideToggle();
    $(".nav").css("opacity", "1");
+  });
+  $(".hide").click(function() {
+   $(".ev").slideToggle();
   });
   $(".backFlip").click(function(){
     $(".content").toggle();
@@ -38,4 +48,12 @@ $(document).ready(function(){
             $(".nav").css("opacity", "1");
           }
 })
+$(window).scroll(function(){
+  if ($(document).scrollTop() > 50) {
+          $(".add-feed-section").slideUp();
+        } else {
+          $(".add-feed-section").slideDown();
+        }
+})
+
 });

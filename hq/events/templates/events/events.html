@@ -1,117 +1,104 @@
-{% extends './base.html' %}
-
 {% load static %}
 
-{% block css%}{% static './events/css/events.css' %} {% endblock %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="theme-color" content="#6a89cc">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="icon" href="{% static './events/img/icon.jpeg' %}">
+    <link rel="stylesheet" href="{% static './events/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static './events/css/styles.css' %}">
+    <meta charset="utf-8">
+    <title>HiQ | Events</title>
+  </head>
+  <body class="body">
+      <div class="nav">
+            <div class="navbar car">
+              <img src="{% static './home/img/career.svg' %}" class="logo" alt="">
+            </div>
 
-{% block title %} Hiq | Events {% endblock %}
+            <div class="navbar ham">
+              <img src="{% static './home/img/hamburger.jpg' %}" class="logo" alt="">
+            </div>
 
-{% block header %}
+            <div class="navbar options">
+              <a href="{% url 'home:home' %}">Home</a>
+            </div>
 
+            <div class="navbar options">
+              <a href="{% url 'profile:profile' %}">Profile</a>
+            </div>
 
-    <h1 class="text-center jumbotron">Hiq | Events</h1>
+            <div class="navbar options">
+              <a href="{% url 'Feeds:Feeds' %}">Feeds</a>
+            </div>
 
-<div class="nav-bar">
-    <div class="navbar first options">
-        <a href="{% url 'home:home' %}" class="btn btn-warning">Home</a>
-    </div>
-    <div class="navbar options">
-        <a href="{% url 'events:events' %}" class="btn btn-warning">Events</a>
-    </div>
-
-    <div class="navbar options">
-      <a href="{% url 'Feeds:Feeds' %}"><button class="btn btn-warning">Feeds</button></a>
-    </div>
-        <!-- <div class="navbar options"> -->
-          <!-- <a href="#">Projects</a> -->
-        <!-- </div> -->
-    <div class="navbar options">
-        <a href="{% url 'developers:contact' %}" class="btn btn-warning">Contact</a>
-    </div>
-
-    <div class="navbar options">
-        <a href="{% url 'profile:profile' %}" class="btn btn-warning">Profile</a>
-    </div>
-
-    <div class="navbar options">
-        <a href="{% url 'gallery:view_photo' %}" class="btn btn-warning">Gallery</a>
-    </div>
-
-</div>
-
-{% endblock %}
+            <div class="navbar options">
+              <a href="{% url 'gallery:view_photo' %}">Gallery</a>
+            </div>
+     <!--
+            <div class="navbar options">
+              <a href="{% url 'developers:contact' %}">Contact</a>
+            </div> -->
 
 
-{% block content %}
+                        {% if loginshow %}
 
-    <p class="head">Latest updates</p>
+                            <div class="navbar options first">
+                                <a href="{% url 'logout:logout' %}"><button type="button" id="showForm"  class="btn btn-danger topbtn" name="button">Log out</button></a>
+                            </div>
+                        {% else %}
+                        <div class="navbar options first">
+                            <a href="{% url 'login:login' %}"><button type="button" id="showForm"  class="btn btn-success topbtn" name="button">Log in</button></a>
+                        </div>
+                        {% endif %}
 
-    <div class="user-post">
+        </div>
 
-        {% for event in events %}
-            <p>
-                <ul>
-                        <li>
-                            <b style="color:green;"> {{event.event_organizer.Email}}</b>
-                        </li>
-                            {{event.event_description}} Date -> {{event.event_date}}
-                            <p style="color:#fff;text-align:right;font-size:10px;">Posted on -> {{event.event_post_date}}</p>
-                </ul>
-            </p>
-            <hr  style="background-color:red;">
+
+    <div class="events-post">
+      <div class="add-feed-section ev">
+          <form class="form-group" action="{% url 'events:add_event' %}" method="post">
+              {% csrf_token %}
+
+              <textarea type="text" name="description" class="text-feed" rows="3"  placeholder="write a brief description" required></textarea>
+              <input type="text" class="form-control ll" name="location" placeholder="Location" required>
+              <input type="datetime-local" class="form-control ll" name="eventup_date" required>
+              <a href="{% url 'events:add_event' %}"><button class="btn btn-default post-btn" name="button">Post</button></a>
+
+          </form>
+      </div>
+      <div class="hide">
+        <span>Add</span>
+      </div>
+      <hr>
+
+      <!-- event template -->
+        {% for users in events %}
+
+        <div class="feed">
+          <div class="row">
+            <div class="col-md-1">
+              <img src="/media/{{users.event_organizer.profilepic}}"class="profile" alt="profile">
+            </div>
+            <div class="col-md-5 name usr">
+              <p>{{users.event_organizer.First_Name}}</p>
+            </div>
+          </div>
+          <!-- text template -->
+          <p class="feed-text">{{users.event_description}}</p>
+          <br>
+          <div class="row comment-section">
+            <span class="com">Location :</span> <p class="count">{{users.event_venue}}</p> <span class="time">{{users.eventup_date}}</span>
+          </div>
+        </div>
+
         {% endfor %}
+      <!-- end -->
 
     </div>
-
-    <div class="add_event">
-
-        <a href="{% url 'events:add_event' %}" title = "add event" class="add_event">
-
-            <img src="{% static './events/img/plus.jpg' %}" alt="">
-
-        </a>
-
-    </div>
-
-{% endblock %}
-
-
-{% block footer %}
-
-    <div class="row">
-        <div class="col-4-md">
-            To follow us click on the link below <br>
-            <a href="mailto:hiqpoint@googlegroups.com.com?subject=feedback">Follow developer</a>
-        </div>
-
-        <div class="col-4-md">
-            <div class="nav-bar">
-                <div class="navbar first options">
-                    <a href="{% url 'home:home' %}">Home</a>
-                </div>
-                <div class="navbar options">
-                    <a href="{% url 'events:events' %}">Events</a>
-                </div>
-                    <!-- <div class="navbar options"> -->
-                      <!-- <a href="#">Projects</a> -->
-                    <!-- </div> -->
-
-            </div>
-
-        </div>
-        <div class="col-4-md">
-            <div class="nav-bar">
-
-                <div class="navbar options">
-                    <a href="{% url 'developers:contact' %}">Contact</a>
-                </div>
-
-                <div class="navbar options">
-                    <a href="{% url 'profile:profile' %}">Profile</a>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-{% endblock %}
+  </body>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+ <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <script src="{% static 'events/js/App.js' %}"></script>
+</html>

@@ -10,7 +10,7 @@ def login(request):
     error_var = ""
     sess = ""
     alredylog=""
-    events_list.objects.filter(event_date__lte = datetime.datetime.now()).delete()
+    events_list.objects.filter(eventup_date__lte = datetime.datetime.now()).delete()
 
 
     if request.method == 'POST':
@@ -25,32 +25,32 @@ def login(request):
 
             if logstats.Password == request.POST["password"]:
 
-                if logstats.logstatus:
-                    alredylog = r"This account is already logged in, Please try again....✋✊"
+                # if logstats.logstatus:
+                #     alredylog = r"This account is already logged in, Please try again....✋✊"
+                #
+                # else:
+                request.session["username"] = logstats.First_Name
 
-                else:
-                    request.session["username"] = logstats.First_Name
-
-                    logstats.logstatus = True
-                    logstats.save()
+                logstats.logstatus = True
+                logstats.save()
                     # print()
 
-                    # request.session["email"] = signup_user.objects.get(Email = request.POST['email'])
+                # request.session["email"] = signup_user.objects.get(Email = request.POST['email'])
 
 
-                    # set the username of the currrent user
-                    sess = request.session["username"]
-                    # set the session variable email address
-                    request.session["email"] = request.POST['email']
+                # set the username of the currrent user
+                sess = request.session["username"]
+                # set the session variable email address
+                request.session["email"] = request.POST['email']
 
-                    # Expires immediately th user exits the browser
-                    request.session.set_expiry(0)
+                # Expires immediately th user exits the browser
+                request.session.set_expiry(0)
 
-                    # redirect users to their profile page
-                    return redirect("profile/")
+                # redirect users to their profile page
+                return redirect("profile/")
 
             else:
-                error_var = "Wrong password"
+                error_var = "Wrong credentials Please try again"
     else:
         pass
 

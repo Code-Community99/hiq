@@ -6,4 +6,4 @@ class uploadform(forms.ModelForm):
     # category = forms.ChoiceField(options=["It"])
     class Meta:
         model = project
-        fields = ["project_name" , "project_description" , "file"]
+        fields = ["category" , "project_name" , "project_description" , "file"]

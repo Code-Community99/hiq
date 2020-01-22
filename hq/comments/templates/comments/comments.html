@@ -1,78 +1,118 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <link rel="stylesheet" href="{% static './comments/index.css' %}">
-        <meta charset="utf-8">
-        <title>HiQ | Comments</title>
-    </head>
-    <body>
-
-        <div class="nav-bar container">
-            <div class="navbar first options">
-                <a href="{% url 'home:home' %}" class="btn btn-warning">Home</a>
-            </div>
-            <div class="navbar options">
-                <button class="btn btn-warning"><a href="{% url 'events:events' %}">Events</a></button>
-            </div>
-
-            <div class="navbar options">
-              <a href="{% url 'Feeds:Feeds' %}"><button class="btn btn-warning">Feeds</button></a>
+  <head>
+    <meta name="theme-color" content="#6a89cc">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="icon" href="{% static './comments/img/icon.jpeg' %}">
+    <link rel="stylesheet" href="{% static './comments/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static './comments/css/styles.css' %}">
+    <meta charset="utf-8">
+    <title>HiQ | Feed</title>
+  </head>
+  <body class="body">
+      <div class="nav">
+            <div class="navbar car">
+              <img src="{% static './home/img/career.svg' %}" class="logo" alt="">
             </div>
 
-                <!-- <div class="navbar options"> -->
-                  <!-- <a href="#">Projects</a> -->
-                <!-- </div> -->
-            <div class="navbar options">
-                <a href="{% url 'developers:contact' %}" class="btn btn-warning">Contact</a>
+            <div class="navbar ham">
+              <img src="{% static './home/img/hamburger.jpg' %}" class="logo" alt="">
             </div>
 
             <div class="navbar options">
-                <a href="{% url 'profile:profile' %}" class="btn btn-warning">Profile</a>
+              <a href="{% url 'home:home' %}">Home</a>
             </div>
 
             <div class="navbar options">
-                <a href="{% url 'gallery:view_photo' %}" class="btn btn-warning">Gallery</a>
+              <a href="{% url 'profile:profile' %}">Profile</a>
             </div>
 
-        </div>
-        <div id="poster">
-            <img src="/media/{{fidcontent.uid.profilepic}}" alt="{{fidcontent.uid.Email}}" title="{{fidcontent.uid.Email}}">
-            <p>
-                <dl>
-                    <dt>
-                        Paymaster
-                    </dt>
-                        <dd>Title - >{{fidcontent.feed}}</dd>
-                </dl>
-            </p>
-        </div>
-            <div class="users">
+            <div class="navbar options">
+              <a href="{% url 'events:events' %}">Events</a>
+            </div>
 
-                {% for comment in comments %}
-                <div class="uinfo">
-                    <img src="/media/{{comment.uid.profilepic}}" alt="{{comment.uid.Email}}" title="{{comment.uid.Email}}">
-                    <h1>{{comment.uid.First_Name}}</h1>
+            <div class="navbar options">
+              <a href="{% url 'Feeds:Feeds' %}">Feeds</a>
+            </div>
 
+            <div class="navbar options">
+              <a href="{% url 'gallery:view_photo' %}">Gallery</a>
+            </div>
+<!--
+            <div class="navbar options">
+              <a href="{% url 'developers:contact' %}">Contact</a>
+            </div> -->
+
+            {% if loginshow %}
+
+                <div class="navbar options first">
+                    <a href="{% url 'logout:logout' %}"><button type="button" id="showForm"  class="btn btn-danger topbtn" name="button">Log out</button></a>
                 </div>
 
-                    <div class="feed">
-                        <p>
-                            {{comment.comments}}
-                        </p>
-                        <div id="timer">
-                            {{comment.comment_post_time}}
-                        </div>
+            {% else %}
 
-                    </div>
-
+            <div class="navbar options first">
+                <a href="{% url 'login:login' %}"><button type="button" id="showForm"  class="btn btn-success topbtn" name="button">Log in</button></a>
             </div>
-        {% endfor %}
-        <form class="form-control" id="test" action="{% url 'coms:addcomment' %}" method="post">
-            {% csrf_token %}
-            {{form.as_table}}
-            <input type="hidden" name="fid" value={{fid}}>
-            <input type="submit" name="addComment" value="Comment">
-        </form>
-    </body>
+            {% endif %}
+
+        </div>
+
+
+    <div class="posts">
+      <!-- user's post template -->
+      <div class="feed1">
+        <div class="row">
+          <div class="col-md-1">
+            <img src="/media/{{fidcontent.uid.profilepic}}"class="profile" alt="profile">
+          </div>
+          <div class="col-md-1 name usr">
+            <p>{{fidcontent.uid.First_Name}}</p>
+          </div>
+        </div>
+        <!-- text template -->
+        <p class="feed-text commentFeed">{{fidcontent.feed}}</p>
+        <br>
+      </div>
+      <!-- end -->
+
+      <!-- comments tepmlate -->
+
+      {% for comment in comments%}
+
+          <div class="feed2">
+            <div class="row">
+              <div class="col-md-1">
+                <img src="/media/{{comment.uid.profilepic}}"class="com-profile" alt="profile">
+              </div>
+              <div class="col-md-1 name2 usrr">
+                <strong><p>{{comment.uid.First_Name}}</p></strong>
+              </div>
+            </div>
+            <!-- text template -->
+            <p class="feed-text2">{{comment.comments}}</p>
+            <br>
+            <span class="timer">{{comment.comment_post_time}}</span>
+            <hr>
+          </div>
+
+      {% endfor %}
+
+      <!-- end -->
+
+    </div>
+
+    <!-- adding comment form -->
+    <div class="comment_Action">
+      <form class="form-group" action="{% url 'coms:addcomment' %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="fid" value={{fid}}>
+        <textarea type="text" name="comments" class="form-control cm" required placeholder="comment" cols="30"></textarea>
+        <button type="submit" class="btn btn-info send" name="button">send </button>
+      </form>
+    </div>
+    <!-- end -->
+  </body>
 </html>

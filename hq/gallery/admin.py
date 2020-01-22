@@ -4,7 +4,7 @@ from django.contrib import admin
 from .models import HiQGallery
 
 class md(admin.ModelAdmin):
-    list_display = "uid" , "image"
+    list_display = ("uid" , "image")
 
 
 admin.site.register(HiQGallery , md)

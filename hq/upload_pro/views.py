@@ -10,9 +10,11 @@ from signup.models import signup_user
 def projects(request):
     try:
         pro = project.objects.filter(uid = signup_user.objects.get(Email = request.session["email"])).order_by("uploadtime")
+
     except:
         errorlog = "Login First"
         return redirect("/login")
+
     else:
 
         return render(request , "./upload_pro/projects.html" , context = {"yourprojects":pro})
@@ -41,7 +43,7 @@ def delete_project(request , deletedp = "Nothing altered .... "):
 
         userinfo = signup_user.objects.get(Email = request.session["email"])
 
-    return render(request , "./uprofile/profile.html" , context = {"projects":project.objects.filter(uid = userinfo.uid) ,
+    return render(request , "./uprofile/user.html" , context = {"projects":project.objects.filter(uid = userinfo.uid) ,
     "userinfo":userinfo , "profile": signup_user.objects.get(Email = request.session["email"]).profilepic, "email":uname , "username":usern})
 
     # return render(request , "./uprofile/profile.html" , context = {"pro_del":deletedp,"otherpros":otherprojects})

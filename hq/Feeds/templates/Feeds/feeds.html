@@ -21,9 +21,9 @@
             <!-- <div class="navbar options"> -->
               <!-- <a href="#">Projects</a> -->
             <!-- </div> -->
-        <div class="navbar options">
+        <!-- <div class="navbar options">
             <a href="{% url 'developers:contact' %}" class="btn btn-warning">Contact</a>
-        </div>
+        </div> -->
 
         <div class="navbar options">
             <a href="{% url 'profile:profile' %}" class="btn btn-warning">Profile</a>
@@ -40,18 +40,33 @@
 {% block content %}
 <div class="row">
 
-    <div class="col-sm-8 col-md-8 col-lg-8 child1">
+    <div class="col-sm-12 col-md-12 col-lg-12 child1">
+        <div class="mainfeed">
         {% for feed in updates %}
-            <p>
-                <img src="/media/{{feed.uid.profilepic}}" alt="">
-                <a href="{% url 'coms:comments' feed.Fid %}">{{feed.feed}}</a>
-                <br>
-                <span>{{feed.post_time}}</span>
-            </p>
-        {% endfor %}
-    </div>
-    <div class="col-sm-4 col-md-4 col-lg-4 child2">
+            <div class="feed1">
 
+                <div id="image">
+                    <img src="/media/{{feed.uid.profilepic}}" alt="{{feed.uid.Email}}" id = "profile">
+                </div>
+
+                <div id="feed">
+                        <dl>
+                            <dt><h1>{{feed.uid.First_Name}}</h1></dt>
+                            <dd id="feedHeade">
+                                <a href="{% url 'coms:comments' feed.Fid %}">{{feed.Heading}}</a>
+                                <br>
+                                <p id="feed-desc">{{feed.feed}}</p>
+                            </dd>
+                        </dl>
+                    <br>
+                    <p id="post-time">{{feed.post_time}}</p>
+                </div>
+                <br>
+
+            </div>
+        {% endfor %}
+
+        </div>
     </div>
 
 </div>

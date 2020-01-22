@@ -10,6 +10,9 @@ $(document).ready(function(){
    $(".options").slideToggle();
    $(".nav").css("opacity", "1");
   });
+  $(".hide").click(function() {
+   $(".ev").slideToggle();
+  });
   $(".backFlip").click(function(){
     $(".content").toggle();
     $(".backContent").toggle();
@@ -38,4 +41,9 @@ $(document).ready(function(){
             $(".nav").css("opacity", "1");
           }
 })
+$(window).scroll(function(){
+       if ($(document).scrollTop() > 50) {
+          $(".add-feed-section").slideUp();
+})
+
 });

@@ -11,57 +11,64 @@
     <title>HiQ | Home</title>
   </head>
   <body class="body">
-    <div class="nav">
-      <div class="navbar car">
-        <img src="{% static 'home/img/career.svg' %}" class="logo" alt="">
-      </div>
-      <div class="navbar ham">
-        <img src="{% static 'home/img/hamburger.jpg' %}" class="logo" alt="">
-      </div>
+      <div class="nav">
+            <div class="navbar car">
+              <img src="{% static './home/img/career.svg' %}" class="logo" alt="">
+            </div>
 
-        <!-- <div class="navbar options">
-             <a href="{% url 'home:home' %}" class="btn btn-warning">Home</a>
-        </div> -->
+            <div class="navbar ham">
+              <img src="{% static './home/img/hamburger.jpg' %}" class="logo" alt="">
+            </div>
 
-      <!-- <div class="navbar options">
-        <a href="{% url 'events:events' %}" class="btn btn-warning">Events</a>
-      </div> -->
-
-
-      <!-- <div class="navbar options"> -->
-        <!-- <a href="#">Projects</a> -->
-      <!-- </div> -->
-      <div class="navbar options">
-        <a href="{% url 'developers:contact' %}" ><button class="btn btn-warning" > Contact</button></a>
-      </div>
-
-      <div class="navbar options">
-        <a href="{% url 'profile:profile' %}"><button class="btn btn-warning"> Profile</button></a>
-      </div>
-
-      <div class="navbar options">
-          <a href="{% url 'events:events' %}" class="btn btn-warning">Events</a>
-      </div>
-
-      <div class="navbar options">
-        <a href="{% url 'Feeds:Feeds' %}"><button class="btn btn-warning">Feeds</button></a>
-      </div>
-
-      <div class="navbar options">
-          <a href="{% url 'gallery:view_photo' %}"><button class="btn btn-warning"> Gallery</button></a>
-      </div>
-
-      {% if loginshow %}
-
-        {% else %}
             <div class="navbar options">
+              <a href="{% url 'home:home' %}">Home</a>
+            </div>
+
+            <div class="navbar options">
+              <a href="{% url 'profile:profile' %}">Profile</a>
+            </div>
+
+            <div class="navbar options">
+              <a href="{% url 'events:events' %}">Events</a>
+            </div>
+
+            <div class="navbar options">
+              <a href="{% url 'Feeds:Feeds' %}">Feeds</a>
+            </div>
+
+            <div class="navbar options">
+              <a href="{% url 'gallery:view_photo' %}">Gallery</a>
+            </div>
+<!--
+            <div class="navbar options">
+              <a href="{% url 'developers:contact' %}">Contact</a>
+            </div> -->
+
+            {% if loginshow %}
+
+            <div class="navbar options first">
+                <a href="{% url 'logout:logout' %}"><button type="button" id="showForm"  class="btn btn-danger topbtn" name="button">Log out</button></a>
+            </div>
+
+            {% else %}
+            <div class="navbar options first">
                 <a href="{% url 'login:login' %}"><button type="button" id="showForm"  class="btn btn-success topbtn" name="button">Log in</button></a>
             </div>
-        {% endif %}
-      <!-- <div class="navbar options">
-          <button type="button" id="showForm" class="btn btn-info topbtn" name="button">Sign Up</button>
-      </div> -->
-    </div>
+            {% endif %}
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="navbar first options">
         <a href="{% url 'home:home' %}">Gallery</a>
     </div>
